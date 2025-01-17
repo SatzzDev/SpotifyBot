@@ -36,7 +36,7 @@ Siesta.on('message', async(msg) => {
 if (!msg.text || !isUrl(msg.text)) return
 Siesta.sendMessage(msg.chat.id, "Please Wait...")
 try {
-if (msg.text.includes("tiktok")) {
+if (msg.text.includes("tiktok.com")) {
 const res = await fetchJson("https://api.tiklydown.eu.org/api/download?url=" + msg.text)
 if (!res.video || !res.video.noWatermark) throw new Error("Invalid response")
 const buffer = await getBuffer(res.video.noWatermark)
