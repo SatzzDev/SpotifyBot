@@ -34,7 +34,8 @@ throw err
 }
 
 Siesta.on('message', async(msg) => {
-if (msg.text.startsWith("https://") && msg.text.includes("tiktok")) {
+if (msg.text.startsWith("https://")) {
+if (msg.text.includes("tiktok")) {
 Siesta.sendMessage(msg.chat.id, "Please Wait...")
 try {
 let res = await fetchJson("https://api.tiklydown.eu.org/api/download?url=" + msg.text)
@@ -43,7 +44,7 @@ await Siesta.sendVideo(msg.chat.id, buffer, { caption: "Siesta Downloader" })
 } catch (error) {
 Siesta.sendMessage(msg.chat.id, "Error downloading or sending video.")
 }
-} else if (msg.text.startsWith("https://") && msg.text.includes("spotify")) {
+} else if (msg.text.includes("spotify")) {
 Siesta.sendMessage(msg.chat.id, "Please Wait...")
 try {
 let res = await fetchJson("https://api.satzzdev.xyz/api/spotifydl?url=" + msg.text)
@@ -52,7 +53,7 @@ await Siesta.sendAudio(msg.chat.id, buffers, { caption: "Siesta Downloader" })
 } catch (error) {
 Siesta.sendMessage(msg.chat.id, "Error downloading or sending video.")
 }
-} else if (msg.text.startsWith("https://") && msg.text.includes("youtube")) {
+} else if (msg.text.includes("youtube")) {
 Siesta.sendMessage(msg.chat.id, "Please Wait...")
 try {
 let res = await fetchJson("https://api.satzzdev.xyz/api/ytmp3?url=" + msg.text)
@@ -60,6 +61,7 @@ const buffs = await getBuffer(res.download.url)
 await Siesta.sendAudio(msg.chat.id, buffs, { caption: "Siesta Downloader" })
 } catch (error) {
 Siesta.sendMessage(msg.chat.id, "Error downloading or sending video.")
+}
 }
 }
 })
