@@ -119,7 +119,7 @@ return
 const audioBuffer = await getBuffer(downloadUrlRes.url)
 await bot.sendAudio(msg.chat.id, audioBuffer, { caption: "Made With ❤️ by @krniwnstria" })
 } catch (err) {
-bot.sendMessage(msg.chat.id, "error njir coba lagu lain aja")
+bot.sendMessage(msg.chat.id, "Something went wrong :C")
 }
 }
 
