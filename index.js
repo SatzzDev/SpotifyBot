@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const tele = require("node-telegram-bot-api")
 const axios = require("axios")
-const token = '7825526143:AAExgf_KTBjCy2dcV5fFCwx7odpyz18B6GM'
+const token = process.env.token
 const bot = new tele(token, { polling: true })
 const path = require('path')
 let searchResults = []
@@ -79,7 +79,7 @@ if (!msg.text) return
 bot.sendMessage(msg.chat.id, "Processing your search...")
 try {
 const query = encodeURIComponent(msg.text)
-const searchUrl = `https://sapisz.vercel.app/api/spotify?query=${query}`
+const searchUrl = `https://api-cyber.vercel.app/v1/spotify?query=${query}`
 const res = await fetchJson(searchUrl)
 if (!res || !res.results || res.results.length === 0) {
 bot.sendMessage(msg.chat.id, "No results found for your query.")
@@ -111,7 +111,7 @@ currentIndex += 1
 sendTrack(msg, searchResults[currentIndex], currentIndex)
 } else if (action === 'download') {
 try {
-const downloadUrlRes = await fetchJson(`https://sapisz.vercel.app/api/spotifydl?url=${param}`)
+const downloadUrlRes = await fetchJson(`https://api-cyber.vercel.app/v1/spotifydl?url=${param}`)
 if (!downloadUrlRes.status || !downloadUrlRes.url) {
 bot.sendMessage(msg.chat.id, "Sorry, the download link is not available.")
 return
